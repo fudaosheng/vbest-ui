@@ -8368,12 +8368,12 @@ var BLoading_component = normalizeComponent(
 )
 
 /* harmony default export */ var BLoading = (BLoading_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/scroll/BScroll.vue?vue&type=template&id=9cd44598&
-var BScrollvue_type_template_id_9cd44598_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"scroll",class:_vm.scrollClass,style:(_vm.scrollStyleCom),on:{"wheel":_vm.handleWheel,"mouseenter":_vm.handleRefresh}},[_c('div',{ref:"content",class:_vm.prefixCls + '-content'},[_vm._t("default")],2),(!_vm.disableBar)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isScrollable),expression:"isScrollable"}],ref:"bar",class:_vm.barClass,style:(_vm.barStyleCom),on:{"mouseenter":_vm.handleBarMouseEnter,"mouseleave":_vm.handleBarMouseLeave}},[_c('div',{ref:"load",class:_vm.loadClass,style:(_vm.loadStyleCom),on:{"mousedown":_vm.handleLoadMouseDown}})]):_vm._e()])}
-var BScrollvue_type_template_id_9cd44598_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/scroll/BScroll.vue?vue&type=template&id=0de471ce&
+var BScrollvue_type_template_id_0de471ce_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"scroll",class:_vm.scrollClass,style:(_vm.scrollStyleCom),on:{"wheel":_vm.handleWheel,"mouseenter":_vm.handleRefresh}},[_c('div',{ref:"content",class:_vm.prefixCls + '-content'},[_vm._t("default")],2),(!_vm.disableBar)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isScrollable),expression:"isScrollable"}],ref:"bar",class:_vm.barClass,style:(_vm.barStyleCom),on:{"mouseenter":_vm.handleBarMouseEnter,"mouseleave":_vm.handleBarMouseLeave}},[_c('div',{ref:"load",class:_vm.loadClass,style:(_vm.loadStyleCom),on:{"mousedown":_vm.handleLoadMouseDown}})]):_vm._e()])}
+var BScrollvue_type_template_id_0de471ce_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/scroll/BScroll.vue?vue&type=template&id=9cd44598&
+// CONCATENATED MODULE: ./src/components/scroll/BScroll.vue?vue&type=template&id=0de471ce&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
 var es_array_index_of = __webpack_require__("c975");
@@ -8778,12 +8778,13 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
     /**鼠标进入scroll区域，主动触发刷新 */
     handleRefresh: function handleRefresh() {
+      var _this2 = this;
+
       /**如果禁用滚动或者页面可滚动距离过小不刷新 */
       if (this.isDisable || !this.isScrollable) return;
-
-      if (this.$refs.content.offsetHeight - this.$refs.scroll.offsetHeight != this.offsetHeight) {
-        this.refresh();
-      }
+      this.$nextTick(function () {
+        _this2.refresh();
+      });
     },
 
     /**鼠标进入滚动条 */
@@ -8816,16 +8817,16 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       objStyle.transition = "all ".concat(duration, "s");
     },
     initScroll: function initScroll() {
-      var _this2 = this;
+      var _this3 = this;
 
       this.$nextTick().then(function () {
-        _this2.barStyle = _this2.$refs.bar && _this2.$refs.bar.style;
-        _this2.loadStyle = _this2.$refs.load && _this2.$refs.load.style;
-        _this2.contentStyle = _this2.$refs.content && _this2.$refs.content.style;
-        _this2.scrollStyle = _this2.$refs.scroll && _this2.$refs.scroll.style;
+        _this3.barStyle = _this3.$refs.bar && _this3.$refs.bar.style;
+        _this3.loadStyle = _this3.$refs.load && _this3.$refs.load.style;
+        _this3.contentStyle = _this3.$refs.content && _this3.$refs.content.style;
+        _this3.scrollStyle = _this3.$refs.scroll && _this3.$refs.scroll.style;
         /**初始化更新滚动条 */
 
-        _this2.refresh();
+        _this3.refresh();
       });
     },
     enterBarStyle: function enterBarStyle() {
@@ -8872,23 +8873,23 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
   },
   watch: {
     getPullingDistance: function getPullingDistance() {
-      var _this3 = this;
+      var _this4 = this;
 
-      /**对触底事件进行处理，使其在200ms内不处发 
+      /**对触底事件进行处理，使其在200ms内不处发
        * 设置一个变量，在pull事件时不能moving
-      */
+       */
       if (Math.abs(this.wheelDeltaY) < this.pullingDistance) {
         if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(function () {
-          _this3.$emit('pullingDown');
+          _this4.$emit("pullingDown");
         }, this.pullingDelay);
       } else if (this.getPullingDistance < this.pullingDistance) {
         if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(function () {
-          _this3.$emit('pullingUp');
+          _this4.$emit("pullingUp");
 
-          _this3.$nextTick(function () {
-            _this3.refresh();
+          _this4.$nextTick(function () {
+            _this4.refresh();
           });
         }, this.pullingDelay);
       }
@@ -8912,8 +8913,8 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
 var BScroll_component = normalizeComponent(
   scroll_BScrollvue_type_script_lang_js_,
-  BScrollvue_type_template_id_9cd44598_render,
-  BScrollvue_type_template_id_9cd44598_staticRenderFns,
+  BScrollvue_type_template_id_0de471ce_render,
+  BScrollvue_type_template_id_0de471ce_staticRenderFns,
   false,
   null,
   null,
