@@ -32,6 +32,9 @@ export function getElementViewTop(element) {
 }
 
 /**获取滚动距离 */
+/**获取一个原生文档位置
+ * @param w    html dom
+ */
 export function getScrollOffset(w) {
   /**使用指定的窗口或window */
   w = w || window;
