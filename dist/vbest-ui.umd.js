@@ -6731,12 +6731,12 @@ var BPoptip_component = normalizeComponent(
 )
 
 /* harmony default export */ var BPoptip = (BPoptip_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=1f108024&
-var BProgressvue_type_template_id_1f108024_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[(_vm.showThumb)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShow),expression:"isShow"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showThumbItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])])])}
-var BProgressvue_type_template_id_1f108024_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=3f9d91c0&
+var BProgressvue_type_template_id_3f9d91c0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[(_vm.showThumb)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShow),expression:"isShow"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showThumbItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])])])}
+var BProgressvue_type_template_id_3f9d91c0_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=1f108024&
+// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=3f9d91c0&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=script&lang=js&
 
@@ -6894,11 +6894,19 @@ var BProgressvue_type_template_id_1f108024_staticRenderFns = []
     /**进度条小球样式 */
     loadbarStyle: function loadbarStyle() {
       var style = {
-        width: this.strokeWidth ? "".concat(this.strokeWidth * 2.5, "px") : "",
-        height: this.strokeWidth ? "".concat(this.strokeWidth * 2.5, "px") : "",
+        width: this.strokeWidth ? "".concat(this.thumbSize, "px") : "",
+        height: this.strokeWidth ? "".concat(this.thumbSize, "px") : "",
         backgroundColor: "".concat(this.thumbColor)
       };
       return style;
+    },
+
+    /**进度条滑块尺寸 */
+    thumbSize: function thumbSize() {
+      /**如果strokeWidth大于一个临界值，那么thumb和轨道比例将缩小 */
+      var thumbSize = this.strokeWidth < 8 ? this.strokeWidth * 4 : this.strokeWidth * 3;
+      thumbSize = thumbSize < 12 ? 12 : thumbSize;
+      return thumbSize;
     },
 
     /**进度条小球圆心样式 */
@@ -7077,8 +7085,8 @@ var BProgressvue_type_template_id_1f108024_staticRenderFns = []
 
 var BProgress_component = normalizeComponent(
   progress_BProgressvue_type_script_lang_js_,
-  BProgressvue_type_template_id_1f108024_render,
-  BProgressvue_type_template_id_1f108024_staticRenderFns,
+  BProgressvue_type_template_id_3f9d91c0_render,
+  BProgressvue_type_template_id_3f9d91c0_staticRenderFns,
   false,
   null,
   null,
