@@ -4550,6 +4550,10 @@ function getElementViewTop(element) {
 }
 /**获取滚动距离 */
 
+/**获取一个原生文档位置
+ * @param w    html dom
+ */
+
 function getScrollOffset(w) {
   /**使用指定的窗口或window */
   w = w || window;
@@ -4584,6 +4588,8 @@ function getScrollOffset(w) {
 
 function preventDefault(e) {
   e = e || window.event;
+  /**阻止window默认事件 */
+
   if (e.preventDefault) e.preventDefault();
   e.returnValue = false;
 }
@@ -6725,16 +6731,25 @@ var BPoptip_component = normalizeComponent(
 )
 
 /* harmony default export */ var BPoptip = (BPoptip_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=7bf114d6&
-var BProgressvue_type_template_id_7bf114d6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[(_vm.showLoadbar)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShow),expression:"isShow"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showLoadbarItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])])])}
-var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=1f108024&
+var BProgressvue_type_template_id_1f108024_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[(_vm.showThumb)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShow),expression:"isShow"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showThumbItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])])])}
+var BProgressvue_type_template_id_1f108024_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=7bf114d6&
+// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=1f108024&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=script&lang=js&
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6780,20 +6795,6 @@ var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
       type: Boolean,
       default: false
     },
-    proWidth: {
-      type: String,
-      default: ""
-    },
-    baseColor: {
-      //progree 背景颜色
-      type: String,
-      default: ""
-    },
-    strokeColor: {
-      //进度条颜色
-      type: [String, Array],
-      default: ""
-    },
 
     /**是否显示动画 */
     isActive: {
@@ -6801,24 +6802,40 @@ var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
       default: false
     },
 
-    /**小球背景色 */
-    loadbarColor: {
+    /**进度条宽度 */
+    strokeWidth: {
+      type: Number,
+      default: NaN
+    },
+    trackBaseColor: {
+      //progree 背景颜色
+      type: String,
+      default: ""
+    },
+    trackColor: {
+      //进度条颜色
+      type: [String, Array],
+      default: ""
+    },
+
+    /**进度条滑块背景色 */
+    thumbColor: {
       type: String,
       default: ""
     },
 
     /**小球圆心背景色 */
-    loadbarItemColor: {
+    thumbItemColor: {
       type: String,
       default: ""
     },
     //是否显示进度条小球
-    showLoadbar: {
+    showThumb: {
       type: Boolean,
       default: false
     },
     //是否显示进度条小球圆心
-    showLoadbarItem: {
+    showThumbItem: {
       type: Boolean,
       default: true
     }
@@ -6853,10 +6870,10 @@ var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
     /**进度条背景样式 */
     outBgStyle: function outBgStyle() {
       var style = {
-        backgroundColor: "".concat(this.baseColor),
-        height: this.vertical ? "" : "".concat(this.proWidth),
-        width: this.vertical ? "".concat(this.proWidth) : "",
-        borderRadius: this.proWidth ? "".concat(this.proWidth) : "" //设置滚动条高度时修改border-radius
+        backgroundColor: "".concat(this.trackBaseColor),
+        height: this.vertical ? "" : "".concat(this.strokeWidth, "px"),
+        width: this.vertical ? "".concat(this.strokeWidth, "px") : "",
+        borderRadius: this.strokeWidth ? "".concat(this.strokeWidth, "px") : "" //设置滚动条高度时修改border-radius
 
       };
       return style;
@@ -6867,9 +6884,9 @@ var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
       var style = {
         width: this.vertical ? "" : "".concat(this.percent, "%"),
         height: this.vertical ? "".concat(this.percent, "%") : "",
-        background: this.vertical ? typeof this.strokeColor == "string" ? "".concat(this.strokeColor) : "linear-gradient(to top,".concat(this.strokeColor[0], " 0%,").concat(this.strokeColor[1], " 100%)") : typeof this.strokeColor == "string" ? "".concat(this.strokeColor) : "linear-gradient(to right,".concat(this.strokeColor[0], " 0%,").concat(this.strokeColor[1], " 100%)"),
-        borderRadius: this.proWidth ? "".concat(this.proWidth) : "",
-        transition: this.disableTransition ? 'none' : 'all .4s'
+        background: this.vertical ? typeof this.trackColor == "string" ? "".concat(this.trackColor) : "linear-gradient(to top,".concat(this.trackColor[0], " 0%,").concat(this.trackColor[1], " 100%)") : typeof this.trackColor == "string" ? "".concat(this.trackColor) : "linear-gradient(to right,".concat(this.trackColor[0], " 0%,").concat(this.trackColor[1], " 100%)"),
+        borderRadius: this.strokeWidth ? "".concat(this.strokeWidth, "px") : "",
+        transition: this.disableTransition ? "none" : "all .4s"
       };
       return style;
     },
@@ -6877,9 +6894,9 @@ var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
     /**进度条小球样式 */
     loadbarStyle: function loadbarStyle() {
       var style = {
-        width: this.proWidth != "" ? "1.2em" : "",
-        height: this.proWidth != "" ? "1.2em" : "",
-        backgroundColor: "".concat(this.loadbarColor)
+        width: this.strokeWidth ? "".concat(this.strokeWidth * 2.5, "px") : "",
+        height: this.strokeWidth ? "".concat(this.strokeWidth * 2.5, "px") : "",
+        backgroundColor: "".concat(this.thumbColor)
       };
       return style;
     },
@@ -6888,7 +6905,7 @@ var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
     loadbarItemStyle: function loadbarItemStyle() {
       var style = {
         /**设置进度条小球圆心背景， */
-        background: this.loadbarItemColor ? "".concat(this.loadbarItemColor) : typeof this.strokeColor == "string" ? "".concat(this.strokeColor) : "".concat(this.strokeColor[0])
+        background: this.thumbItemColor ? "".concat(this.thumbItemColor) : typeof this.trackColor == "string" ? "".concat(this.trackColor) : "".concat(this.trackColor[0])
       };
       return style;
     }
@@ -7060,8 +7077,8 @@ var BProgressvue_type_template_id_7bf114d6_staticRenderFns = []
 
 var BProgress_component = normalizeComponent(
   progress_BProgressvue_type_script_lang_js_,
-  BProgressvue_type_template_id_7bf114d6_render,
-  BProgressvue_type_template_id_7bf114d6_staticRenderFns,
+  BProgressvue_type_template_id_1f108024_render,
+  BProgressvue_type_template_id_1f108024_staticRenderFns,
   false,
   null,
   null,
@@ -8022,20 +8039,21 @@ var BAvatar_component = normalizeComponent(
 )
 
 /* harmony default export */ var BAvatar = (BAvatar_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/menu/BMenu.vue?vue&type=template&id=6ce519dc&
-var BMenuvue_type_template_id_6ce519dc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.prefixCls,_vm.prefixCls+"-" + _vm.theme],style:(_vm.menuStyle)},[_c('ul',{class:_vm.prefixCls+'-ul',style:(_vm.ulStyle)},_vm._l((_vm.menu),function(item,index){return _c('li',{key:index,class:[_vm.prefixCls+'-item',(index==_vm.currentIndex||_vm.hoverIndex==index)?(_vm.activeShowBorder?_vm.getMenuItemActive:''):''],style:([_vm.itemStyle,{color:index==_vm.currentIndex?_vm.activeColor:(_vm.hoverIndex==index?_vm.hoverColor||_vm.activeColor:_vm.textColor),
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/menu/BMenu.vue?vue&type=template&id=f7baa56a&
+var BMenuvue_type_template_id_f7baa56a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:[_vm.prefixCls,_vm.prefixCls+"-" + _vm.theme],style:(_vm.menuStyle)},[_c('ul',{class:_vm.prefixCls+'-ul',style:(_vm.ulStyle)},_vm._l((_vm.menu),function(item,index){return _c('li',{key:index,class:[_vm.prefixCls+'-item',(index==_vm.currentIndex||_vm.hoverIndex==index)?(_vm.activeShowBorder?_vm.getMenuItemActive:''):''],style:([_vm.itemStyle,{color:index==_vm.currentIndex?_vm.activeColor:(_vm.hoverIndex==index?_vm.hoverColor||_vm.activeColor:_vm.textColor),
       background:_vm.currentIndex==index?(_vm.activeBackgroundColor!=''?_vm.activeBackgroundColor:
       _vm.theme=='dark'?"#363e4f":''):(_vm.hoverIndex==index?_vm.hoverBackgroundColor||_vm.activeBackgroundColor:''),
-      borderColor:_vm.currentIndex==index?_vm.activeColor:(_vm.hoverIndex==index?_vm.hoverColor||_vm.activeColor:'')}]),on:{"click":function($event){return _vm.handleMenuClick(index)},"mouseenter":function($event){$event.stopPropagation();return _vm.handleMouseEnter(index)},"mouseleave":function($event){$event.stopPropagation();return _vm.handleMouseLeave(index)}}},[_c('div',{class:_vm.prefixCls+'-item-container',style:(_vm.containerStyle)},[_c('i',{class:item.icon,style:(_vm.iconStyle)}),_c('span',[_vm._v(_vm._s(item.content||item))])])])}),0)])}
-var BMenuvue_type_template_id_6ce519dc_staticRenderFns = []
+      borderColor:_vm.currentIndex==index?_vm.activeColor:(_vm.hoverIndex==index?_vm.hoverColor||_vm.activeColor:'')}]),on:{"click":function($event){return _vm.handleMenuClick(index)},"mouseenter":function($event){$event.stopPropagation();return _vm.handleMouseEnter(index)},"mouseleave":function($event){$event.stopPropagation();return _vm.handleMouseLeave(index)}}},[_c('div',{class:_vm.prefixCls+'-item-container',style:(_vm.containerStyle)},[(item.icon)?_c('i',{class:item.icon,style:(_vm.iconStyle)}):_vm._e(),_c('span',[_vm._v(_vm._s(item.content||item))])])])}),0)])}
+var BMenuvue_type_template_id_f7baa56a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/menu/BMenu.vue?vue&type=template&id=6ce519dc&
+// CONCATENATED MODULE: ./src/components/menu/BMenu.vue?vue&type=template&id=f7baa56a&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.link.js
 var es_string_link = __webpack_require__("9911");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/menu/BMenu.vue?vue&type=script&lang=js&
+
 
 //
 //
@@ -8065,6 +8083,10 @@ var BMenuvue_type_script_lang_js_prefixCls = "vbestui-menu";
 /* harmony default export */ var BMenuvue_type_script_lang_js_ = ({
   name: "BMenu",
   props: {
+    activeIndex: {
+      type: Number,
+      default: 0
+    },
     menu: {
       type: Array,
       default: []
@@ -8122,6 +8144,7 @@ var BMenuvue_type_script_lang_js_prefixCls = "vbestui-menu";
     return {
       prefixCls: BMenuvue_type_script_lang_js_prefixCls,
       currentIndex: 0,
+      //当前活跃下标
       hoverIndex: 0 //鼠标移动时活跃
 
     };
@@ -8182,6 +8205,7 @@ var BMenuvue_type_script_lang_js_prefixCls = "vbestui-menu";
         this.$router.push("".concat(this.menu[index].link));
       }
 
+      this.$emit('update:activeIndex', this.currentIndex);
       this.$emit("click", this.currentIndex);
     },
     handleMouseEnter: function handleMouseEnter(index) {
@@ -8192,6 +8216,16 @@ var BMenuvue_type_script_lang_js_prefixCls = "vbestui-menu";
     handleMouseLeave: function handleMouseLeave(index) {
       this.hoverIndex = this.currentIndex;
       this.hovershowChildsMenu = false; //鼠标移入隐藏子菜单
+    }
+  },
+  watch: {
+    /**监听初始活跃menu */
+    activeIndex: {
+      handler: function handler() {
+        this.currentIndex = this.activeIndex;
+        this.hoverIndex = this.activeIndex;
+      },
+      immediate: true
     }
   }
 });
@@ -8207,8 +8241,8 @@ var BMenuvue_type_script_lang_js_prefixCls = "vbestui-menu";
 
 var BMenu_component = normalizeComponent(
   menu_BMenuvue_type_script_lang_js_,
-  BMenuvue_type_template_id_6ce519dc_render,
-  BMenuvue_type_template_id_6ce519dc_staticRenderFns,
+  BMenuvue_type_template_id_f7baa56a_render,
+  BMenuvue_type_template_id_f7baa56a_staticRenderFns,
   false,
   null,
   null,
@@ -8377,17 +8411,17 @@ var BLoading_component = normalizeComponent(
 )
 
 /* harmony default export */ var BLoading = (BLoading_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/scroll/BScroll.vue?vue&type=template&id=0de471ce&
-var BScrollvue_type_template_id_0de471ce_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"scroll",class:_vm.scrollClass,style:(_vm.scrollStyleCom),on:{"wheel":_vm.handleWheel,"mouseenter":_vm.handleRefresh}},[_c('div',{ref:"content",class:_vm.prefixCls + '-content'},[_vm._t("default")],2),(!_vm.disableBar)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isScrollable),expression:"isScrollable"}],ref:"bar",class:_vm.barClass,style:(_vm.barStyleCom),on:{"mouseenter":_vm.handleBarMouseEnter,"mouseleave":_vm.handleBarMouseLeave}},[_c('div',{ref:"load",class:_vm.loadClass,style:(_vm.loadStyleCom),on:{"mousedown":_vm.handleLoadMouseDown}})]):_vm._e()])}
-var BScrollvue_type_template_id_0de471ce_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/scroll/BScroll.vue?vue&type=template&id=752b03bd&
+var BScrollvue_type_template_id_752b03bd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"scroll",class:_vm.scrollClass,style:(_vm.scrollStyleCom),on:{"wheel":_vm.handleWheel,"mouseenter":_vm.handleRefresh}},[_c('div',{ref:"content",class:_vm.prefixCls + '-content'},[_vm._t("default")],2),(!_vm.disableBar)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isScrollable),expression:"isScrollable"}],ref:"bar",class:_vm.barClass,style:(_vm.barStyleCom),on:{"mouseenter":_vm.handleBarMouseEnter,"mouseleave":_vm.handleBarMouseLeave}},[_c('div',{ref:"load",class:_vm.loadClass,style:(_vm.loadStyleCom),on:{"mousedown":_vm.handleLoadMouseDown}})]):_vm._e()])}
+var BScrollvue_type_template_id_752b03bd_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/scroll/BScroll.vue?vue&type=template&id=0de471ce&
+// CONCATENATED MODULE: ./src/components/scroll/BScroll.vue?vue&type=template&id=752b03bd&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
 var es_array_index_of = __webpack_require__("c975");
 
-// CONCATENATED MODULE: ./src/utils/debounce.js
+// CONCATENATED MODULE: ./src/utils/tool.js
 // 这个是用来获取当前时间戳的
 function now() {
   return +new Date();
@@ -8462,6 +8496,20 @@ function debounce2(fn, delay) {
       fn && fn.apply(_this, args);
     }, delay);
   };
+} // 时间戳方案--节流
+
+function throttle(fn, wait) {
+  var pre = Date.now();
+  return function () {
+    var context = this;
+    var args = arguments;
+    var now = Date.now();
+
+    if (now - pre >= wait) {
+      fn.apply(context, args);
+      pre = Date.now();
+    }
+  };
 }
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/scroll/BScroll.vue?vue&type=script&lang=js&
 
@@ -8531,40 +8579,46 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       default: 50
     },
 
-    /**禁用滚动条 true禁用*/
-    disableBar: {
-      type: Boolean,
-      default: false
-    },
-
     /**是否禁用滚动 :禁用所有滚动*/
     isDisable: {
       type: Boolean,
       default: false
     },
 
-    /**now 禁用mousewheel */
+    /**禁用mousewheel */
     disableWheel: {
       type: Boolean,
       default: false
     },
+
+    /**禁用滚动条 true禁用*/
+    disableBar: {
+      type: Boolean,
+      default: false
+    },
+
+    /**滚动条滑块是否是圆角样式 */
     round: {
       type: Boolean,
       default: false
     },
-    barColor: {
+
+    /**滚动条轨道背景颜色 */
+    trackColor: {
       type: String,
       default: ""
     },
-    barActiveColor: {
+    trackActiveColor: {
       type: String,
       default: ""
     },
-    loadColor: {
+
+    /**滚动条滑块颜色 */
+    thumbColor: {
       type: String,
       default: ""
     },
-    loadActiveColor: {
+    thumbActiveColor: {
       type: String,
       default: ""
     }
@@ -8608,7 +8662,7 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
     },
     barStyleCom: function barStyleCom() {
       return {
-        background: this.barColor
+        background: this.trackColor
       };
     },
     loadClass: function loadClass() {
@@ -8618,7 +8672,7 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       return {
         top: this.getLoadOffset + "px",
         height: this.loadHeight + "px",
-        background: this.loadColor,
+        background: this.thumbColor,
         borderRadius: this.round ? "8px" : ""
       };
     },
@@ -8634,7 +8688,7 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
     /**只要有一个自定义颜色，就覆盖默认主题 */
     isSetBar: function isSetBar() {
-      return this.barColor != "" && this.barActiveColor != "" && this.loadColor != "" && this.loadActiveColor;
+      return this.trackColor != "" && this.trackActiveColor != "" && this.thumbColor != "" && this.thumbActiveColor;
     },
 
     /**是否可滚动，不可滚动时不显示滚动条
@@ -8787,12 +8841,12 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
     /**鼠标进入scroll区域，主动触发刷新 */
     handleRefresh: function handleRefresh() {
-      var _this2 = this;
+      var _this = this;
 
       /**如果禁用滚动或者页面可滚动距离过小不刷新 */
       if (this.isDisable || !this.isScrollable) return;
       this.$nextTick(function () {
-        _this2.refresh();
+        _this.refresh();
       });
     },
 
@@ -8826,16 +8880,16 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       objStyle.transition = "all ".concat(duration, "s");
     },
     initScroll: function initScroll() {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$nextTick().then(function () {
-        _this3.barStyle = _this3.$refs.bar && _this3.$refs.bar.style;
-        _this3.loadStyle = _this3.$refs.load && _this3.$refs.load.style;
-        _this3.contentStyle = _this3.$refs.content && _this3.$refs.content.style;
-        _this3.scrollStyle = _this3.$refs.scroll && _this3.$refs.scroll.style;
+        _this2.barStyle = _this2.$refs.bar && _this2.$refs.bar.style;
+        _this2.loadStyle = _this2.$refs.load && _this2.$refs.load.style;
+        _this2.contentStyle = _this2.$refs.content && _this2.$refs.content.style;
+        _this2.scrollStyle = _this2.$refs.scroll && _this2.$refs.scroll.style;
         /**初始化更新滚动条 */
 
-        _this3.refresh();
+        _this2.refresh();
       });
     },
     enterBarStyle: function enterBarStyle() {
@@ -8845,7 +8899,7 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       this.theme == "light" ? this.setBarStyle("14px", "var(--bg-color)", "#a8a8a8") : this.setBarStyle("14px", "#1e1e1e", "#4f4f4f");
 
       if (!this.isSetBar || this.isSetBar) {
-        this.setBarStyle("14px", this.barActiveColor || this.barColor, this.loadActiveColor || this.loadColor);
+        this.setBarStyle("14px", this.trackActiveColor || this.trackColor, this.thumbActiveColor || this.thumbColor);
       }
 
       this.loadStyle.borderRadius = this.round ? "14px" : ""; // this.scrollStyle.paddingRight = "14px";//version0.1.9 取消鼠标进入样式
@@ -8854,7 +8908,7 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       this.theme == "light" ? this.setBarStyle("8px", "transparent", "var(--bg-color)") : this.setBarStyle("8px", "#1e1e1e", "#4f4f4f");
 
       if (!this.isSetBar || this.isSetBar) {
-        this.setBarStyle("8px", this.barColor, this.loadColor);
+        this.setBarStyle("8px", this.trackColor, this.thumbColor);
       }
 
       this.loadStyle.borderRadius = this.round ? "8px" : "";
@@ -8872,17 +8926,16 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
     }
   },
   created: function created() {
-    this.initScroll();
+    this.initScroll(); // const _this = this;
+    // window.onresize = function () {
+    //   _this.initScroll();
+    // };
 
-    var _this = this;
-
-    window.onresize = function () {
-      _this.initScroll();
-    };
+    window.addEventListener("resize", throttle(this.initScroll, 500));
   },
   watch: {
     getPullingDistance: function getPullingDistance() {
-      var _this4 = this;
+      var _this3 = this;
 
       /**对触底事件进行处理，使其在200ms内不处发
        * 设置一个变量，在pull事件时不能moving
@@ -8890,15 +8943,15 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       if (Math.abs(this.wheelDeltaY) < this.pullingDistance) {
         if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(function () {
-          _this4.$emit("pullingDown");
+          _this3.$emit("pullingDown");
         }, this.pullingDelay);
       } else if (this.getPullingDistance < this.pullingDistance) {
         if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(function () {
-          _this4.$emit("pullingUp");
+          _this3.$emit("pullingUp");
 
-          _this4.$nextTick(function () {
-            _this4.refresh();
+          _this3.$nextTick(function () {
+            _this3.refresh();
           });
         }, this.pullingDelay);
       }
@@ -8922,8 +8975,8 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
 var BScroll_component = normalizeComponent(
   scroll_BScrollvue_type_script_lang_js_,
-  BScrollvue_type_template_id_0de471ce_render,
-  BScrollvue_type_template_id_0de471ce_staticRenderFns,
+  BScrollvue_type_template_id_752b03bd_render,
+  BScrollvue_type_template_id_752b03bd_staticRenderFns,
   false,
   null,
   null,
@@ -9691,6 +9744,115 @@ var BTableTd_component = normalizeComponent(
 )
 
 /* harmony default export */ var BTableTd = (BTableTd_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mask/BMask.vue?vue&type=template&id=3b09da8d&
+var BMaskvue_type_template_id_3b09da8d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.maskClass,style:(_vm.maskStyle)},[_vm._t("default",[(_vm.icon)?_c('i',{class:_vm.icon,style:(_vm.iconStyle)}):_vm._e(),(!_vm.icon && _vm.src)?_c('img',{style:(_vm.imgStyle),attrs:{"src":_vm.src,"alt":""}}):_vm._e(),(_vm.text)?_c('span',[_vm._v(_vm._s(_vm.text))]):_vm._e()])],2)}
+var BMaskvue_type_template_id_3b09da8d_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/mask/BMask.vue?vue&type=template&id=3b09da8d&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/mask/BMask.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var BMaskvue_type_script_lang_js_prefixCls = "vbestui-mask";
+/* harmony default export */ var BMaskvue_type_script_lang_js_ = ({
+  name: "BMask",
+  data: function data() {
+    return {
+      prefixCls: BMaskvue_type_script_lang_js_prefixCls
+    };
+  },
+  props: {
+    /**是否是相对与屏幕显示 */
+    fix: {
+      type: Boolean,
+      default: false
+    },
+    icon: {
+      type: String,
+      default: ""
+    },
+    src: {
+      type: String,
+      default: ""
+    },
+    text: {
+      type: String,
+      default: ""
+    },
+    color: {
+      type: String,
+      default: ""
+    },
+
+    /**只对icon、img有效 */
+    size: {
+      type: String,
+      default: ""
+    },
+    fontSize: {
+      type: String,
+      default: ""
+    },
+    background: {
+      type: String,
+      default: ""
+    }
+  },
+  computed: {
+    maskClass: function maskClass() {
+      return ["".concat(this.prefixCls), this.fix ? "".concat(this.prefixCls + "-fix") : ""];
+    },
+    maskStyle: function maskStyle() {
+      return {
+        color: this.color,
+        backgroundColor: this.background,
+        fontSize: this.fontSize
+      };
+    },
+    iconStyle: function iconStyle() {
+      return {
+        color: this.color,
+        fontSize: this.size
+      };
+    },
+    imgStyle: function imgStyle() {
+      return {
+        width: this.size,
+        height: this.size
+      };
+    }
+  }
+});
+// CONCATENATED MODULE: ./src/components/mask/BMask.vue?vue&type=script&lang=js&
+ /* harmony default export */ var mask_BMaskvue_type_script_lang_js_ = (BMaskvue_type_script_lang_js_); 
+// CONCATENATED MODULE: ./src/components/mask/BMask.vue
+
+
+
+
+
+/* normalize component */
+
+var BMask_component = normalizeComponent(
+  mask_BMaskvue_type_script_lang_js_,
+  BMaskvue_type_template_id_3b09da8d_render,
+  BMaskvue_type_template_id_3b09da8d_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var BMask = (BMask_component.exports);
 // EXTERNAL MODULE: ./src/style/index.css
 var style = __webpack_require__("b29b");
 
@@ -9808,7 +9970,8 @@ function globalDirectives(Vue) {
 
 
 
-var components = [BInput, BSwitch, BRadio, BRadioGroup, BCheckbox, BCheckboxGroup, BButton, BAlert, Modal, Notice, BToast, BTooltip, BPoptip, BProgress, BCircle, BSwiper, BSwiperItem, BTag, BAvatar, BMenu, BLoading, BScroll, BList, BListTitle, BListItem, BTable, BTableHead, BTableBody, BTableTr, BTableTd];
+
+var components = [BInput, BSwitch, BRadio, BRadioGroup, BCheckbox, BCheckboxGroup, BButton, BAlert, Modal, Notice, BToast, BTooltip, BPoptip, BProgress, BCircle, BSwiper, BSwiperItem, BTag, BAvatar, BMenu, BLoading, BScroll, BList, BListTitle, BListItem, BTable, BTableHead, BTableBody, BTableTr, BTableTd, BMask];
 
 function globalInstance(Vue, option) {
   var constructor = Vue.extend(option);
