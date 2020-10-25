@@ -6731,16 +6731,26 @@ var BPoptip_component = normalizeComponent(
 )
 
 /* harmony default export */ var BPoptip = (BPoptip_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=3f9d91c0&
-var BProgressvue_type_template_id_3f9d91c0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[(_vm.showThumb)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShow),expression:"isShow"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showThumbItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])])])}
-var BProgressvue_type_template_id_3f9d91c0_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=2e7a4b18&
+var BProgressvue_type_template_id_2e7a4b18_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass,on:{"mouseenter":_vm.handleProgressMouseEnter,"mouseleave":_vm.handleProgressMouseLeave}},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[_c('transition',{attrs:{"name":"vbestui-progress-opacity"}},[(_vm.isHoverShowThumb ? _vm.getIsHover : _vm.showThumb)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShow),expression:"isShow"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showThumbItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])],1)])])}
+var BProgressvue_type_template_id_2e7a4b18_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=3f9d91c0&
+// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=2e7a4b18&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=script&lang=js&
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6834,6 +6844,12 @@ var BProgressvue_type_template_id_3f9d91c0_staticRenderFns = []
       type: Boolean,
       default: false
     },
+
+    /**显示进度条小球，并且只有在鼠标hover时才显示 */
+    hoverShowThumb: {
+      type: Boolean,
+      default: false
+    },
     //是否显示进度条小球圆心
     showThumbItem: {
       type: Boolean,
@@ -6901,14 +6917,6 @@ var BProgressvue_type_template_id_3f9d91c0_staticRenderFns = []
       return style;
     },
 
-    /**进度条滑块尺寸 */
-    thumbSize: function thumbSize() {
-      /**如果strokeWidth大于一个临界值，那么thumb和轨道比例将缩小 */
-      var thumbSize = this.strokeWidth < 8 ? this.strokeWidth * 4 : this.strokeWidth * 3;
-      thumbSize = thumbSize < 12 ? 12 : thumbSize;
-      return thumbSize;
-    },
-
     /**进度条小球圆心样式 */
     loadbarItemStyle: function loadbarItemStyle() {
       var style = {
@@ -6916,15 +6924,48 @@ var BProgressvue_type_template_id_3f9d91c0_staticRenderFns = []
         background: this.thumbItemColor ? "".concat(this.thumbItemColor) : typeof this.trackColor == "string" ? "".concat(this.trackColor) : "".concat(this.trackColor[0])
       };
       return style;
+    },
+
+    /**进度条滑块尺寸 */
+    thumbSize: function thumbSize() {
+      /**根据strokeWidth 的值动态设置 滑块thumb的宽高
+       * 大于8 thumb=strokeWidth*3
+       * 小于3 thumb=strokeWidth*5
+       */
+      var thumbSize = this.strokeWidth > 8 ? this.strokeWidth * 3 : this.strokeWidth * 4;
+      thumbSize = this.strokeWidth <= 3 ? this.strokeWidth * 5 : thumbSize;
+      thumbSize = thumbSize < 12 ? 12 : thumbSize;
+      return thumbSize;
+    },
+
+    /**判断是否是hover显示滑块 */
+    isHoverShowThumb: function isHoverShowThumb() {
+      return this.showThumb && this.hoverShowThumb;
+    },
+
+    /**动态获取_hoverShowThumb数据 */
+    getIsHover: function getIsHover() {
+      return this.isHover;
     }
   },
   data: function data() {
     return {
-      isDrag: false //是否处于拖拽状态
+      isDrag: false,
+      //是否处于拖拽状态
+      isHover: false //hoverShowThumb模式下判断thumb是否显示
 
     };
   },
   methods: {
+    /**鼠标进入滚动条 */
+    handleProgressMouseEnter: function handleProgressMouseEnter() {
+      if (!this.hoverShowThumb) return;
+      this.isHover = true;
+    },
+    handleProgressMouseLeave: function handleProgressMouseLeave() {
+      if (!this.hoverShowThumb) return;
+      this.isHover = false;
+    },
     handleClick: function handleClick(e) {
       /**不允许点击、拖拽时不执行函数 */
       if (!this.allowClick) return false;
@@ -7085,8 +7126,8 @@ var BProgressvue_type_template_id_3f9d91c0_staticRenderFns = []
 
 var BProgress_component = normalizeComponent(
   progress_BProgressvue_type_script_lang_js_,
-  BProgressvue_type_template_id_3f9d91c0_render,
-  BProgressvue_type_template_id_3f9d91c0_staticRenderFns,
+  BProgressvue_type_template_id_2e7a4b18_render,
+  BProgressvue_type_template_id_2e7a4b18_staticRenderFns,
   false,
   null,
   null,
@@ -8419,12 +8460,12 @@ var BLoading_component = normalizeComponent(
 )
 
 /* harmony default export */ var BLoading = (BLoading_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/scroll/BScroll.vue?vue&type=template&id=752b03bd&
-var BScrollvue_type_template_id_752b03bd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"scroll",class:_vm.scrollClass,style:(_vm.scrollStyleCom),on:{"wheel":_vm.handleWheel,"mouseenter":_vm.handleRefresh}},[_c('div',{ref:"content",class:_vm.prefixCls + '-content'},[_vm._t("default")],2),(!_vm.disableBar)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isScrollable),expression:"isScrollable"}],ref:"bar",class:_vm.barClass,style:(_vm.barStyleCom),on:{"mouseenter":_vm.handleBarMouseEnter,"mouseleave":_vm.handleBarMouseLeave}},[_c('div',{ref:"load",class:_vm.loadClass,style:(_vm.loadStyleCom),on:{"mousedown":_vm.handleLoadMouseDown}})]):_vm._e()])}
-var BScrollvue_type_template_id_752b03bd_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/scroll/BScroll.vue?vue&type=template&id=3da8f8f3&
+var BScrollvue_type_template_id_3da8f8f3_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{ref:"scroll",class:_vm.scrollClass,style:(_vm.scrollStyleCom),on:{"wheel":_vm.handleWheel,"mouseenter":_vm.handleRefresh}},[_c('div',{ref:"content",class:_vm.prefixCls + '-content'},[_vm._t("default")],2),(!_vm.disableBar)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isScrollable),expression:"isScrollable"}],ref:"bar",class:_vm.barClass,style:(_vm.barStyleCom),on:{"mouseenter":_vm.handleBarMouseEnter,"mouseleave":_vm.handleBarMouseLeave}},[_c('div',{ref:"load",class:_vm.loadClass,style:(_vm.loadStyleCom),on:{"mousedown":_vm.handleLoadMouseDown}})]):_vm._e()])}
+var BScrollvue_type_template_id_3da8f8f3_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/scroll/BScroll.vue?vue&type=template&id=752b03bd&
+// CONCATENATED MODULE: ./src/components/scroll/BScroll.vue?vue&type=template&id=3da8f8f3&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.index-of.js
 var es_array_index_of = __webpack_require__("c975");
@@ -8523,6 +8564,8 @@ function throttle(fn, wait) {
 
 
 
+//
+//
 //
 //
 //
@@ -8735,20 +8778,24 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
     /**更新scroll，重新计算滚动量，滚动条滚动距离，滚动条高度 */
     refresh: function refresh() {
-      /**可滚动区间 */
-      this.offsetHeight = this.$refs.content.offsetHeight - this.$refs.scroll.offsetHeight;
-      /**根据 滚动条高度/内容高度 计算滚动条高度 */
+      var _this = this;
 
-      if (this.isScrollable) {
-        this.loadHeight = this.$refs.scroll.offsetHeight / this.$refs.content.offsetHeight * this.$refs.scroll.offsetHeight;
-        /**设置load最少高度 */
+      this.$nextTick(function () {
+        /**可滚动区间 :有bug初始化获取不到offsetHeight*/
+        if (_this.$refs.content) _this.offsetHeight = _this.$refs.content.offsetHeight - _this.$refs.scroll.offsetHeight;
+        /**根据 滚动条高度/内容高度 计算滚动条高度 */
 
-        this.loadHeight = this.loadHeight < 25 ? 25 : this.loadHeight;
-      }
-      /**滚动条可滚动距离 */
+        if (_this.isScrollable && _this.$refs.scroll) {
+          _this.loadHeight = _this.$refs.scroll.offsetHeight / _this.$refs.content.offsetHeight * _this.$refs.scroll.offsetHeight;
+          /**设置load最少高度 */
+
+          _this.loadHeight = _this.loadHeight < 25 ? 25 : _this.loadHeight;
+        }
+        /**滚动条可滚动距离 */
 
 
-      this.scrollY = this.$refs.scroll.offsetHeight - this.loadHeight;
+        _this.scrollY = _this.$refs.scroll && _this.$refs.scroll.offsetHeight - _this.loadHeight;
+      });
     },
 
     /**内部函数，不可外部调用 */
@@ -8849,13 +8896,10 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
     /**鼠标进入scroll区域，主动触发刷新 */
     handleRefresh: function handleRefresh() {
-      var _this = this;
-
       /**如果禁用滚动或者页面可滚动距离过小不刷新 */
-      if (this.isDisable || !this.isScrollable) return;
-      this.$nextTick(function () {
-        _this.refresh();
-      });
+      if (this.isDisable || !this.isScrollable) return; // this.$nextTick(() => {
+
+      this.refresh(); // });
     },
 
     /**鼠标进入滚动条 */
@@ -8887,6 +8931,7 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
       objStyle.transition = "all ".concat(duration, "s");
     },
+    // 初始化滚动条
     initScroll: function initScroll() {
       var _this2 = this;
 
@@ -8895,10 +8940,10 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
         _this2.loadStyle = _this2.$refs.load && _this2.$refs.load.style;
         _this2.contentStyle = _this2.$refs.content && _this2.$refs.content.style;
         _this2.scrollStyle = _this2.$refs.scroll && _this2.$refs.scroll.style;
-        /**初始化更新滚动条 */
-
-        _this2.refresh();
       });
+      /**初始化更新滚动条 */
+
+      this.refresh();
     },
     enterBarStyle: function enterBarStyle() {
       if (this.isDisable) return;
@@ -8934,12 +8979,10 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
     }
   },
   created: function created() {
-    this.initScroll(); // const _this = this;
-    // window.onresize = function () {
-    //   _this.initScroll();
-    // };
+    this.initScroll();
+    /**监听页面大小 */
 
-    window.addEventListener("resize", throttle(this.initScroll, 500));
+    window.addEventListener("resize", throttle(this.refresh, 500));
   },
   watch: {
     getPullingDistance: function getPullingDistance() {
@@ -8948,6 +8991,8 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
       /**对触底事件进行处理，使其在200ms内不处发
        * 设置一个变量，在pull事件时不能moving
        */
+
+      /**触顶 */
       if (Math.abs(this.wheelDeltaY) < this.pullingDistance) {
         if (this.timer) clearTimeout(this.timer);
         this.timer = setTimeout(function () {
@@ -8958,9 +9003,7 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
         this.timer = setTimeout(function () {
           _this3.$emit("pullingUp");
 
-          _this3.$nextTick(function () {
-            _this3.refresh();
-          });
+          _this3.refresh();
         }, this.pullingDelay);
       }
     },
@@ -8983,8 +9026,8 @@ var BScrollvue_type_script_lang_js_prefixCls = "vbestui-scroll";
 
 var BScroll_component = normalizeComponent(
   scroll_BScrollvue_type_script_lang_js_,
-  BScrollvue_type_template_id_752b03bd_render,
-  BScrollvue_type_template_id_752b03bd_staticRenderFns,
+  BScrollvue_type_template_id_3da8f8f3_render,
+  BScrollvue_type_template_id_3da8f8f3_staticRenderFns,
   false,
   null,
   null,
