@@ -6722,12 +6722,12 @@ var BPoptip_component = normalizeComponent(
 )
 
 /* harmony default export */ var BPoptip = (BPoptip_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=2e7a4b18&
-var BProgressvue_type_template_id_2e7a4b18_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass,on:{"mouseenter":_vm.handleProgressMouseEnter,"mouseleave":_vm.handleProgressMouseLeave}},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[_c('transition',{attrs:{"name":"vbestui-progress-opacity"}},[(_vm.isHoverShowThumb ? _vm.getIsHover : _vm.showThumb)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShow),expression:"isShow"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showThumbItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])],1)])])}
-var BProgressvue_type_template_id_2e7a4b18_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"2650fce6-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=template&id=21ee2bc8&
+var BProgressvue_type_template_id_21ee2bc8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.progressClass,on:{"mouseenter":_vm.handleProgressMouseEnter,"mouseleave":_vm.handleProgressMouseLeave}},[_c('div',{ref:"progress",class:_vm.outClass,style:(_vm.outBgStyle),on:{"click":_vm.handleClick}},[_c('div',{ref:"inner",class:_vm.innerClass,style:(_vm.innerBgStyle)},[_c('transition',{attrs:{"name":"vbestui-progress-opacity"}},[(_vm.showThumb)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.isShowThumbComputed),expression:"isShowThumbComputed"}],ref:"loadbar",class:_vm.loadbarClass,style:(_vm.loadbarStyle),on:{"mousedown":_vm.handleMouseDown,"touchstart":_vm.handleTouStart}},[(_vm.showThumbItem)?_c('div',{class:_vm.loadbarItemClass,style:(_vm.loadbarItemStyle)}):_vm._e()]):_vm._e()])],1)])])}
+var BProgressvue_type_template_id_21ee2bc8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=2e7a4b18&
+// CONCATENATED MODULE: ./src/components/progress/BProgress.vue?vue&type=template&id=21ee2bc8&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/components/progress/BProgress.vue?vue&type=script&lang=js&
 
@@ -6928,10 +6928,13 @@ var BProgressvue_type_template_id_2e7a4b18_staticRenderFns = []
       thumbSize = thumbSize < 12 ? 12 : thumbSize;
       return thumbSize;
     },
+    //判断滑块是否显示
+    isShowThumbComputed: function isShowThumbComputed() {
+      if (!this.isShow) return false; //滑块超出范围隐藏
 
-    /**判断是否是hover显示滑块 */
-    isHoverShowThumb: function isHoverShowThumb() {
-      return this.showThumb && this.hoverShowThumb;
+      /**如果hover显示滑块，拖拽时一直显示，不拖拽时根据是否进入显示，不hover显示滑块时根据isShow判断是否显示 */
+
+      return this.hoverShowThumb ? this.isDrag ? true : this.getIsHover : this.isShow;
     },
 
     /**动态获取_hoverShowThumb数据 */
@@ -7117,8 +7120,8 @@ var BProgressvue_type_template_id_2e7a4b18_staticRenderFns = []
 
 var BProgress_component = normalizeComponent(
   progress_BProgressvue_type_script_lang_js_,
-  BProgressvue_type_template_id_2e7a4b18_render,
-  BProgressvue_type_template_id_2e7a4b18_staticRenderFns,
+  BProgressvue_type_template_id_21ee2bc8_render,
+  BProgressvue_type_template_id_21ee2bc8_staticRenderFns,
   false,
   null,
   null,
